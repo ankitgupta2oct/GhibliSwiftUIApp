@@ -44,6 +44,11 @@ struct FilmDetailScreen: View {
                 .padding()
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                FavoriteButton(filmId: film.id)
+            }
+        }
         .task(id: film) {
             await viewModel.fetch(for: film)
         }
@@ -51,5 +56,9 @@ struct FilmDetailScreen: View {
 }
 
 #Preview {
-    FilmDetailScreen(film: GhibliMocks.instance.films.first!, viewModel: FilmDetailViewModel(personService: MockPersonService()))
+    @Previewable @State var favoriteManager = FavoriteManager(localStorage: MockLocalStorage())
+    NavigationStack {
+        FilmDetailScreen(film: GhibliMocks.instance.films.first!, viewModel: FilmDetailViewModel(personService: MockPersonService()))
+            .environment(favoriteManager)
+    }
 }

@@ -1,36 +1,19 @@
 import SwiftUI
 
 struct FilmListView: View {
-    @State var viewModel: FilmListViewModel
     @Environment(FavoriteManager.self) var favoriteManager
-    let contentUnavailableText: String
+    let films: [Film]
         
     var body: some View {
-        Group {
-            switch viewModel.state {
-            case .idle:
-                ContentUnavailableView(contentUnavailableText, systemImage: "rectangle.and.text.magnifyingglass")
-            case .loading:
-                ProgressView {
-                    Text("Loading...")
+        List {
+            ForEach(films) { film in
+                NavigationLink(value: film) {
+                    RowView(film: film, favoriteManager: favoriteManager)
                 }
-            case .loaded(let films):
-                List {
-                    ForEach(films) { film in
-                        NavigationLink(value: film) {
-                            RowView(film: film, favoriteManager: favoriteManager)
-                        }
-                    }
-                }
-                .navigationDestination(for: Film.self) { film in
-                    FilmDetailScreen(film: film)
-                }
-            case .error(let message):
-                Text(message)
             }
         }
-        .task {
-            await viewModel.fetch()
+        .navigationDestination(for: Film.self) { film in
+            FilmDetailScreen(film: film)
         }
     }
     
@@ -38,32 +21,103 @@ struct FilmListView: View {
         let film: Film
         let favoriteManager: FavoriteManager
         
-        private var isFavorite: Bool {
-            favoriteManager.isFavorite(for: film.id)
-        }
-        
         var body: some View {
-            HStack {
+            HStack(alignment: .top) {
                 ImageView(url: film.image)
                     .frame(width: 100, height: 150)
-                Text(film.title)
-                Button {
-                    favoriteManager.toggleFavorite(for: film.id)
-                } label: {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .foregroundStyle(isFavorite ? .red : .primary)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(film.title)
+                            .truncationMode(.tail)
+                            .lineLimit(1)
+                            .bold()
+                        Spacer()
+                        FavoriteButton(filmId: film.id)
+                        .buttonStyle(.plain)
+                    }
+                    Text("Directed by \(film.director)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Text("Released: \(film.releaseYear)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
-                .buttonStyle(.plain)
+                .scenePadding(.top)
             }
         }
     }
 }
 
+//struct FilmListView: View {
+//    @State var viewModel: FilmListViewModel
+//    @Environment(FavoriteManager.self) var favoriteManager
+//    let contentUnavailableText: String
+//        
+//    var body: some View {
+//        Group {
+//            switch viewModel.state {
+//            case .idle:
+//                ContentUnavailableView(contentUnavailableText, systemImage: "rectangle.and.text.magnifyingglass")
+//            case .loading:
+//                ProgressView {
+//                    Text("Loading...")
+//                }
+//            case .loaded(let films):
+//                List {
+//                    ForEach(films) { film in
+//                        NavigationLink(value: film) {
+//                            RowView(film: film, favoriteManager: favoriteManager)
+//                        }
+//                    }
+//                }
+//                .navigationDestination(for: Film.self) { film in
+//                    FilmDetailScreen(film: film)
+//                }
+//            case .error(let message):
+//                Text(message)
+//            }
+//        }
+//        .task {
+//            await viewModel.fetch()
+//        }
+//    }
+//    
+//    private struct RowView: View {
+//        let film: Film
+//        let favoriteManager: FavoriteManager
+//        
+//        var body: some View {
+//            HStack(alignment: .top) {
+//                ImageView(url: film.image)
+//                    .frame(width: 100, height: 150)
+//                VStack(alignment: .leading) {
+//                    HStack {
+//                        Text(film.title)
+//                            .truncationMode(.tail)
+//                            .lineLimit(1)
+//                            .bold()
+//                        Spacer()
+//                        FavoriteButton(filmId: film.id)
+//                        .buttonStyle(.plain)
+//                    }
+//                    Text("Directed by \(film.director)")
+//                        .font(.subheadline)
+//                        .foregroundStyle(.secondary)
+//                    Text("Released: \(film.releaseYear)")
+//                        .font(.caption)
+//                        .foregroundStyle(.secondary)
+//                }
+//                .scenePadding(.top)
+//            }
+//        }
+//    }
+//}
+
 #Preview {
     @Previewable @State var favoriteManager = FavoriteManager(localStorage: MockLocalStorage())
     
     NavigationStack {
-        FilmListView(viewModel: FilmListViewModel(filmService: MockFilmService()), contentUnavailableText: "No data")
+        FilmListView(films: GhibliMocks.instance.films)
             .environment(favoriteManager)
     }
 }
