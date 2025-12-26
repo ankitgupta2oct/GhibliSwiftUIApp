@@ -20,7 +20,11 @@ struct FilmListView: View {
                 List {
                     ForEach(films) { film in
                         NavigationLink(value: film) {
-                            Text(film.title)
+                            HStack {
+                                ImageView(url: film.image)
+                                    .frame(width: 100, height: 150)
+                                Text(film.title)
+                            }
                         }
                     }
                 }
