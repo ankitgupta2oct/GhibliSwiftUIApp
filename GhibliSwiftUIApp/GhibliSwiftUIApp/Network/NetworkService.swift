@@ -6,7 +6,6 @@ protocol NetworkService {
 
 final class NetworkServiceImp: NetworkService {
     func data<T: Decodable>(type: T.Type, _ url: String) async throws(NetworkError) -> T {
-        print(url)
         guard let url = URL(string: url) else {
             throw .invalidUrl(url)
         }

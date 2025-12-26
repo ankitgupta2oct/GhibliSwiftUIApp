@@ -2,16 +2,14 @@ import SwiftUI
 
 struct FilmListView: View {
     @State var viewModel: FilmListViewModel
-    
-    init(viewModel: FilmListViewModel = FilmListViewModel()) {
-        self.viewModel = viewModel
-    }
-    
+    @Environment(FavoriteManager.self) var favoriteManager
+    let contentUnavailableText: String
+        
     var body: some View {
-        NavigationStack {
+        Group {
             switch viewModel.state {
             case .idle:
-                ContentUnavailableView("No films found", systemImage: "rectangle.and.text.magnifyingglass")
+                ContentUnavailableView(contentUnavailableText, systemImage: "rectangle.and.text.magnifyingglass")
             case .loading:
                 ProgressView {
                     Text("Loading...")
@@ -20,11 +18,7 @@ struct FilmListView: View {
                 List {
                     ForEach(films) { film in
                         NavigationLink(value: film) {
-                            HStack {
-                                ImageView(url: film.image)
-                                    .frame(width: 100, height: 150)
-                                Text(film.title)
-                            }
+                            RowView(film: film, favoriteManager: favoriteManager)
                         }
                     }
                 }
@@ -39,8 +33,37 @@ struct FilmListView: View {
             await viewModel.fetch()
         }
     }
+    
+    private struct RowView: View {
+        let film: Film
+        let favoriteManager: FavoriteManager
+        
+        private var isFavorite: Bool {
+            favoriteManager.isFavorite(for: film.id)
+        }
+        
+        var body: some View {
+            HStack {
+                ImageView(url: film.image)
+                    .frame(width: 100, height: 150)
+                Text(film.title)
+                Button {
+                    favoriteManager.toggleFavorite(for: film.id)
+                } label: {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundStyle(isFavorite ? .red : .primary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
 }
 
 #Preview {
-    FilmListView(viewModel: FilmListViewModel(filmService: MockFilmService()))
+    @Previewable @State var favoriteManager = FavoriteManager(localStorage: MockLocalStorage())
+    
+    NavigationStack {
+        FilmListView(viewModel: FilmListViewModel(filmService: MockFilmService()), contentUnavailableText: "No data")
+            .environment(favoriteManager)
+    }
 }

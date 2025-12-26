@@ -1,11 +1,14 @@
 import SwiftUI
 
 struct FavoriteScreen: View {
+    let filmListViewModel: FilmListViewModel
     var body: some View {
-        Text("Favorite")
+        NavigationStack {
+            Text("Favorite")
+        }
     }
 }
 
 #Preview {
-    FavoriteScreen()
+    FavoriteScreen(filmListViewModel: FilmListViewModel(filmService: MockFilmService()))
 }
