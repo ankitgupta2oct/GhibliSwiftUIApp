@@ -29,7 +29,7 @@ struct FilmListView: View {
                     }
                 }
                 .navigationDestination(for: Film.self) { film in
-                    FilmDetailView(film: film)
+                    FilmDetailScreen(film: film)
                 }
             case .error(let message):
                 Text(message)

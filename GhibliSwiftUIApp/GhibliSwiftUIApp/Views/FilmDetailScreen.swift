@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FilmDetailView: View {
+struct FilmDetailScreen: View {
     let film: Film
     @State var viewModel: FilmDetailViewModel
     
@@ -51,5 +51,5 @@ struct FilmDetailView: View {
 }
 
 #Preview {
-    FilmDetailView(film: GhibliMocks.instance.films.first!, viewModel: FilmDetailViewModel(personService: MockPersonService()))
+    FilmDetailScreen(film: GhibliMocks.instance.films.first!, viewModel: FilmDetailViewModel(personService: MockPersonService()))
 }

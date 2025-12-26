@@ -6,7 +6,7 @@ import SwiftUI
 struct GhibliSwiftUIAppApp: App {
     var body: some Scene {
         WindowGroup {
-            FilmListView()
+            HomeScreen()
         }
     }
 }
