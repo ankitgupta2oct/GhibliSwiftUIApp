@@ -1,6 +1,6 @@
 import Foundation
 
-struct Person: Decodable, Identifiable {
+struct Person: Decodable, Identifiable, Hashable {
     let id, name, gender, age: String
     let films: [String]
     let species, url: String

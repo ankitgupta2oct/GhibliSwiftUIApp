@@ -11,7 +11,7 @@ struct FilmListView: View {
         NavigationStack {
             switch viewModel.state {
             case .idle:
-                ContentUnavailableView("No Films found", systemImage: "rectangle.and.text.magnifyingglass")
+                ContentUnavailableView("No films found", systemImage: "rectangle.and.text.magnifyingglass")
             case .loading:
                 ProgressView {
                     Text("Loading...")
@@ -19,8 +19,13 @@ struct FilmListView: View {
             case .loaded(let films):
                 List {
                     ForEach(films) { film in
-                        Text(film.title)
+                        NavigationLink(value: film) {
+                            Text(film.title)
+                        }
                     }
+                }
+                .navigationDestination(for: Film.self) { film in
+                    FilmDetailView(film: film)
                 }
             case .error(let message):
                 Text(message)

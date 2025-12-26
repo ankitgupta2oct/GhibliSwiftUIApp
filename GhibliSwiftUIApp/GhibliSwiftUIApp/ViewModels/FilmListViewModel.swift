@@ -1,12 +1,8 @@
 import Foundation
 
 @Observable
-final class FilmListViewModel {
-    enum State: Equatable {
-        case idle, loading, loaded([Film]), error(String)
-    }
-    
-    var state = State.idle
+final class FilmListViewModel {    
+    var state: ContentLoadingState<[Film]> = .idle
     @ObservationIgnored private let filmService: FilmService
     
     init(filmService: FilmService = FilmServiceImp()) {
