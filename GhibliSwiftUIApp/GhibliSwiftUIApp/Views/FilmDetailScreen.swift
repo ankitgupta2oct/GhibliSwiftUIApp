@@ -16,13 +16,17 @@ struct FilmDetailScreen: View {
                     .scaledToFill()
                     .frame(height: 200)
 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
                     Text(film.title)
+                        .bold()
+                        .font(.title2)
                     
                     Divider()
                     
-                    Text("Characters")
+                    Text("Description")
+                        .bold()
                         .font(.title3)
+                    Text(film.description)
                     
                     switch viewModel.peopleLoadingState {
                     case .idle:
@@ -32,9 +36,15 @@ struct FilmDetailScreen: View {
                             Text("Loading...")
                         }
                     case .loaded(let people):
-                        VStack {
-                            ForEach(people) { person in
-                                Text(person.name)
+                        if !people.isEmpty {
+                            VStack(alignment: .leading) {
+                                Text("Characters")
+                                    .bold()
+                                    .font(.title3)
+                                
+                                ForEach(people) { person in
+                                    Text(person.name)
+                                }
                             }
                         }
                     case .error(let message):

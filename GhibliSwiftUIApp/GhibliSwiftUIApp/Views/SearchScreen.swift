@@ -8,7 +8,7 @@ struct SearchScreen: View {
             VStack {
                 switch viewModel.searchLoadingState {
                 case .idle:
-                    EmptyView()
+                    Text("Please type to search...")
                 case .loading:
                     ProgressView {
                         Text("Loading...")
@@ -19,19 +19,26 @@ struct SearchScreen: View {
                     } else {
                         List {
                             ForEach(films) { film in
-                                RowView(film: film)
+                                NavigationLink(value: film) {
+                                    RowView(film: film)
+                                }
                             }
+                        }
+                        .navigationDestination(for: Film.self) { film in
+                            FilmDetailScreen(film: film)
                         }
                     }
                 case .error(let message):
                     Text(message)
                 }
             }
-            .task(id: viewModel.searchText) {
-                try? await Task.sleep(for: .milliseconds(500))
-                await viewModel.search()
-            }
-            .searchable(text: $viewModel.searchText, prompt: "Type here...")
+            .navigationTitle("Search")
+        }
+        .searchable(text: $viewModel.searchText, prompt: "Type here...")
+        .task(id: viewModel.searchText) {
+            try? await Task.sleep(for: .milliseconds(500))
+            guard !Task.isCancelled else { return }
+            await viewModel.search()
         }
     }
     

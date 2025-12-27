@@ -8,12 +8,10 @@ struct HomeScreen: View {
         TabView {
             Tab("Movies", systemImage: "movieclapper") {
                 MovieScreen(filmListViewModel: filmListViewModel)
-                    .environment(favoriteManager)
             }
             
             Tab("Favorite", systemImage: "heart") {
                 FavoriteScreen(filmListViewModel: filmListViewModel)
-                    .environment(favoriteManager)
             }
             
             Tab("Settings", systemImage: "gear") {
@@ -24,6 +22,7 @@ struct HomeScreen: View {
                 SearchScreen()
             }
         }
+        .environment(favoriteManager)
     }
 }
 

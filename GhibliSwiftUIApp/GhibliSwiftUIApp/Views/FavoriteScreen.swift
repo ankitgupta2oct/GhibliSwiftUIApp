@@ -13,11 +13,14 @@ struct FavoriteScreen: View {
     }
     var body: some View {
         NavigationStack {
-            if favoriteFilms.isEmpty {
-                ContentUnavailableView("No favorite found", systemImage: "rectangle.and.text.magnifyingglass")
-            } else {
-                FilmListView(films: favoriteFilms)
+            Group {
+                if favoriteFilms.isEmpty {
+                    ContentUnavailableView("No favorite found", systemImage: "rectangle.and.text.magnifyingglass")
+                } else {
+                    FilmListView(films: favoriteFilms)
+                }
             }
+            .navigationTitle("Favorite")
         }
         .task {
             await filmListViewModel.fetch()
