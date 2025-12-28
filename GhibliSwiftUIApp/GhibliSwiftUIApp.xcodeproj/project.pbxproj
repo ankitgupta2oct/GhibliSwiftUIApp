@@ -29,20 +29,42 @@
 		6FF2FEEF2EFD259500FA191A /* GhibliSwiftUIAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhibliSwiftUIAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6FF2FF962F00443B00FA191A /* Exceptions for "GhibliSwiftUIAppTests" folder in "GhibliSwiftUIApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ViewModels/SearchViewModelTests.swift,
+			);
+			target = 6FF2FED72EFD259400FA191A /* GhibliSwiftUIApp */;
+		};
+		6FF2FF972F00443B00FA191A /* Exceptions for "GhibliSwiftUIAppTests" folder in "GhibliSwiftUIAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/FilmTestingMockService.swift,
+				ViewModels/SearchViewModelTests.swift,
+			);
+			target = 6FF2FEE42EFD259500FA191A /* GhibliSwiftUIAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6FF2FEDA2EFD259400FA191A /* GhibliSwiftUIApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GhibliSwiftUIApp;
 			sourceTree = "<group>";
 		};
-		6FF2FEE82EFD259500FA191A /* GhibliSwiftUIAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = GhibliSwiftUIAppTests;
-			sourceTree = "<group>";
-		};
 		6FF2FEF22EFD259500FA191A /* GhibliSwiftUIAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GhibliSwiftUIAppUITests;
+			sourceTree = "<group>";
+		};
+		6FF2FF942F00443B00FA191A /* GhibliSwiftUIAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6FF2FF962F00443B00FA191A /* Exceptions for "GhibliSwiftUIAppTests" folder in "GhibliSwiftUIApp" target */,
+				6FF2FF972F00443B00FA191A /* Exceptions for "GhibliSwiftUIAppTests" folder in "GhibliSwiftUIAppTests" target */,
+			);
+			path = GhibliSwiftUIAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF2FEDA2EFD259400FA191A /* GhibliSwiftUIApp */,
-				6FF2FEE82EFD259500FA191A /* GhibliSwiftUIAppTests */,
+				6FF2FF942F00443B00FA191A /* GhibliSwiftUIAppTests */,
 				6FF2FEF22EFD259500FA191A /* GhibliSwiftUIAppUITests */,
 				6FF2FED92EFD259400FA191A /* Products */,
 			);
@@ -109,6 +131,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				6FF2FEDA2EFD259400FA191A /* GhibliSwiftUIApp */,
+				6FF2FF942F00443B00FA191A /* GhibliSwiftUIAppTests */,
 			);
 			name = GhibliSwiftUIApp;
 			packageProductDependencies = (
@@ -129,9 +152,6 @@
 			);
 			dependencies = (
 				6FF2FEE72EFD259500FA191A /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				6FF2FEE82EFD259500FA191A /* GhibliSwiftUIAppTests */,
 			);
 			name = GhibliSwiftUIAppTests;
 			packageProductDependencies = (
@@ -178,6 +198,7 @@
 					};
 					6FF2FEE42EFD259500FA191A = {
 						CreatedOnToolsVersion = 26.1.1;
+						LastSwiftMigration = 2610;
 						TestTargetID = 6FF2FED72EFD259400FA191A;
 					};
 					6FF2FEEE2EFD259500FA191A = {
@@ -395,7 +416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "GhibliSwiftUIApp/Preview\\ Assets/SampleFilms.json GhibliSwiftUIApp/Preview\\ Assets GhibliSwiftUIApp/Preview\\ Assets/SamplePerson.json";
+				DEVELOPMENT_ASSET_PATHS = "GhibliSwiftUIApp/Preview\\ Assets/SamplePerson.json GhibliSwiftUIApp/Services/Mocks/MockPersonService.swift GhibliSwiftUIApp/Services/Mocks/GhibliMocks.swift GhibliSwiftUIApp/Preview\\ Assets/SampleFilms.json GhibliSwiftUIApp/Preview\\ Assets GhibliSwiftUIApp/Services/Mocks/MockLocalStorage.swift GhibliSwiftUIApp/Services/Mocks/MockFilmService.swift GhibliSwiftUIApp/Services/Mocks";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -433,7 +454,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "GhibliSwiftUIApp/Preview\\ Assets/SampleFilms.json GhibliSwiftUIApp/Preview\\ Assets GhibliSwiftUIApp/Preview\\ Assets/SamplePerson.json";
+				DEVELOPMENT_ASSET_PATHS = "GhibliSwiftUIApp/Preview\\ Assets/SamplePerson.json GhibliSwiftUIApp/Services/Mocks/MockPersonService.swift GhibliSwiftUIApp/Services/Mocks/GhibliMocks.swift GhibliSwiftUIApp/Preview\\ Assets/SampleFilms.json GhibliSwiftUIApp/Preview\\ Assets GhibliSwiftUIApp/Services/Mocks/MockLocalStorage.swift GhibliSwiftUIApp/Services/Mocks/MockFilmService.swift GhibliSwiftUIApp/Services/Mocks";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -468,16 +489,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ankit.GhibliSwiftUIAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -489,10 +512,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ankit.GhibliSwiftUIAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -512,6 +536,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ankit.GhibliSwiftUIAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -531,6 +556,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ankit.GhibliSwiftUIAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
